@@ -285,7 +285,9 @@ public class CustomFragmentTabHost extends TabHost
         // We are now ready to go.  Make sure we are switched to the
         // correct tab.
         mAttached = true;
-        ft = doTabChanged(currentTab, ft);
+        if (currentTab != null){
+        	ft = doTabChanged(currentTab, ft);
+        }
         if (ft != null) {
             ft.commit();
             mFragmentManager.executePendingTransactions();
