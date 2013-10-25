@@ -3,6 +3,7 @@ package de.eww.bibapp.fragments.search;
 import java.util.ArrayList;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.v4.app.LoaderManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import de.eww.bibapp.CustomFragmentTabHost;
@@ -78,16 +80,16 @@ public class SearchFragment extends AbstractContainerFragment implements
 	
 	private void addTab(final Class<?> claz, String tag, CharSequence title)
 	{
-		View tabView = this.createTabView(this.mTabHost.getContext(), title);
-		
-		TabSpec tabSpec = this.mTabHost.newTabSpec(tag).setIndicator(tabView);
-		this.mTabHost.addTab(tabSpec, claz, null);
-		
-//		Fragment content = Fragment.instantiate(getActivity(), claz.getName());
+//		View tabView = this.createTabView(this.mTabHost.getContext(), title);
 //		
-//		FragmentTransaction transaction = this.getActivity().getSupportFragmentManager().beginTransaction();
-//		transaction.replace(R.id.search_tabhost, content, tag);
-//		transaction.commit();
+//		TabSpec tabSpec = this.mTabHost.newTabSpec(tag).setIndicator(tabView);
+//		this.mTabHost.addTab(tabSpec, claz, null);
+		
+		Fragment content = Fragment.instantiate(getActivity(), claz.getName());
+		
+		FragmentTransaction transaction = this.getActivity().getSupportFragmentManager().beginTransaction();
+		transaction.replace(R.id.search_tabhost, content, tag);
+		transaction.commit();
 	}
 	
 	private View createTabView(final Context context, final CharSequence title)
@@ -103,29 +105,37 @@ public class SearchFragment extends AbstractContainerFragment implements
 	@Override
 	public SearchAdapter getSearchAdapter()
 	{
-		return ((SearchAdapterInterface) this.mTabHost.getLastTab().getFragment()).getSearchAdapter();
+		Fragment searchTabhost = getActivity().getSupportFragmentManager().findFragmentById(R.id.search_tabhost);
+		SearchAdapterInterface searchAdapter = (SearchAdapterInterface)searchTabhost;
+		return searchAdapter.getSearchAdapter();
 	}
 	
 	@Override
 	public LoaderManager getLoaderManager()
 	{
-		return ((SearchAdapterInterface) this.mTabHost.getLastTab().getFragment()).getLoaderManager();
+		Fragment searchTabhost = getActivity().getSupportFragmentManager().findFragmentById(R.id.search_tabhost);
+		SearchAdapterInterface searchAdapter = (SearchAdapterInterface)searchTabhost;
+		return searchAdapter.getLoaderManager();
 	}
 	
-	public CustomFragmentTabHost getTabHost()
-	{
-		return this.mTabHost;
-	}
+//	public CustomFragmentTabHost getTabHost()
+//	{
+//		return this.mTabHost;
+//	}
 	
 	@Override
 	public int getHits()
 	{
-		return ((SearchAdapterInterface) this.mTabHost.getLastTab().getFragment()).getHits();
+		Fragment searchTabhost = getActivity().getSupportFragmentManager().findFragmentById(R.id.search_tabhost);
+		SearchAdapterInterface searchAdapter = (SearchAdapterInterface)searchTabhost;
+		return searchAdapter.getHits();
 	}
 	
 	@Override
 	public ArrayList<SearchEntry> getResults()
 	{
-		return ((SearchAdapterInterface) this.mTabHost.getLastTab().getFragment()).getResults();
+		Fragment searchTabhost = getActivity().getSupportFragmentManager().findFragmentById(R.id.search_tabhost);
+		SearchAdapterInterface searchAdapter = (SearchAdapterInterface)searchTabhost;
+		return searchAdapter.getResults();
 	}
 }
