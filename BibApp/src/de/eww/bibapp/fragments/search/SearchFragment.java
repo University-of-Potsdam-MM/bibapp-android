@@ -78,16 +78,16 @@ public class SearchFragment extends AbstractContainerFragment implements
 	
 	private void addTab(final Class<?> claz, String tag, CharSequence title)
 	{
-//		View tabView = this.createTabView(this.mTabHost.getContext(), title);
+		View tabView = this.createTabView(this.mTabHost.getContext(), title);
+		
+		TabSpec tabSpec = this.mTabHost.newTabSpec(tag).setIndicator(tabView);
+		this.mTabHost.addTab(tabSpec, claz, null);
+		
+//		Fragment content = Fragment.instantiate(getActivity(), claz.getName());
 //		
-//		TabSpec tabSpec = this.mTabHost.newTabSpec(tag).setIndicator(tabView);
-//		this.mTabHost.addTab(tabSpec, claz, null);
-		
-		Fragment content = Fragment.instantiate(getActivity(), claz.getName());
-		
-		FragmentTransaction transaction = this.getActivity().getSupportFragmentManager().beginTransaction();
-		transaction.replace(R.id.search_tabhost, content, tag);
-		transaction.commit();
+//		FragmentTransaction transaction = this.getActivity().getSupportFragmentManager().beginTransaction();
+//		transaction.replace(R.id.search_tabhost, content, tag);
+//		transaction.commit();
 	}
 	
 	private View createTabView(final Context context, final CharSequence title)

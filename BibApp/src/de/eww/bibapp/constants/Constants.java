@@ -15,8 +15,8 @@ public final class Constants
 	 * @see LOCAL_CATALOGS and keep order in sync
 	 */
 	public static final String[] PAIA_URLS = {
-		"https://paia.gbv.de/isil/DE-Hil2",
-		"https://paia.gbv.de/isil/DE-Hil2"
+		//"https://paia.gbv.de/isil/DE-517",
+		"https://paia.gbv.de/isil/DE-517"
 	};
 	
 	/**
@@ -33,8 +33,8 @@ public final class Constants
 	 * @see BIB_CODES and keep order in sync
 	 */
 	public static final String[][] LOCAL_CATALOGS = {
-		{ "opac-de-hil2", "Lokal 1" },
-		{ "opac-de-hil2", "Lokal 2" }
+		//{ "opac-de-517", "Lokal 1" },
+		{ "opac-de-517", "Lokal 2" }
 	};
 	
 	public static final int LOCAL_CATALOG_DEFAULT = 0;
@@ -74,8 +74,8 @@ public final class Constants
 	 * @see LOCAL_CATALOGS and keep order in sync
 	 */
 	public static final String[] BIB_CODES = {
-		"DE-Hil2",
-		"DE-Hil2"
+		"DE-517",
+		"DE-517"
 	};
 	
 	/**
